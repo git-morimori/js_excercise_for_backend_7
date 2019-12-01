@@ -1,11 +1,11 @@
 //データは配列に格納する
 const comments = [];
-let NextId = 1;
+let nextId = 1;
 
 //Commentクラスの実装。このクラスのインスタンスが各コメントのデータとなる
 class Comment {
   constructor({ username, body }) {
-    this.id = NextId++;
+    this.id = nextId++;
     this.username = username;
     this.body = body;
     this.createdAt = new Date();
