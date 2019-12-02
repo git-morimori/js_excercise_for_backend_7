@@ -22,3 +22,10 @@ for (let i = 0; i < 5; i++) {
   });
   comments.push(comment);
 }
+
+//外部に公開するメソッド
+module.exports = {
+  findAll: () => {
+    return comments.slice();
+  },
+};
