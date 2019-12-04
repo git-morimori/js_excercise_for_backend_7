@@ -5,4 +5,5 @@ module.exports = {
     const storedComments = Comment.findAll();
     res.status(200).json(storedComments);
   },
+  postComment: () => {},
 };
