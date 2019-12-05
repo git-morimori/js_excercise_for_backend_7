@@ -48,11 +48,11 @@ describe('Comment.create()', () => {
   });
 
   it('メソッド実行時、idに紐づくデータがないとエラーになる', () => {
-    const inValidId = 999999999999999;
+    const notExistedId = 999999999999999;
 
     try {
       Comment.update({
-        id: inValidId,
+        id: notExistedId,
         username: 'test username',
         body: 'test body',
       });
@@ -63,22 +63,15 @@ describe('Comment.create()', () => {
   });
 
   it('メソッド実行時、正しい引数を渡すとidに該当するTodoを更新して、更新したTodoを返す', () => {
-    const oldComments = Comment.findAll();
-
     const data = {
       id: 1,
       username: 'test username',
       body: 'test body',
     };
-    console.log(oldComments);
     const updatedComment = Comment.update(data);
 
-    //データ更新後、oldCommentsの内容も更新されてしまっている
-    console.log(oldComments);
-
-    const currentComments = Comment.findAll();
     assert.deepStrictEqual(
-      { ...currentComments[0] },
+      { ...updatedComment },
       {
         id: data.id,
         username: data.username,
@@ -88,18 +81,12 @@ describe('Comment.create()', () => {
       }
     );
 
-    // //データ更新前と更新後でデータが一致しているため、テストが失敗する
-    // assert.notDeepStrictEqual(
-    //   { ...updatedComment },
-    //   { ...oldComments[0] },
-    //   '更新前のデータとupdatedCommentは一致しないはず'
-    // );
-
-    // assert.deepStrictEqual(
-    //   { ...updatedComment },
-    //   { ...currentComments[0] },
-    //   '更新後のデータとupdatedCommentは一致するはず'
-    // );
+    const currentComments = Comment.findAll();
+    assert.deepStrictEqual(
+      { ...updatedComment },
+      { ...currentComments[0] },
+      '更新後のデータとupdatedCommentは一致するはず'
+    );
 
     assert.strictEqual(
       updatedComment.updatedAt > updatedComment.createdAt,
