@@ -63,18 +63,18 @@ describe('Comment.create()', () => {
   });
 
   it('メソッド実行時、正しい引数を渡すとidに該当するTodoを更新して、更新したTodoを返す', () => {
-    const oldCmments = Comment.findAll();
+    const oldComments = Comment.findAll();
 
     const data = {
       id: 1,
       username: 'test username',
       body: 'test body',
     };
-
+    console.log(oldComments);
     const updatedComment = Comment.update(data);
 
     //データ更新後、oldCommentsの内容も更新されてしまっている
-    console.log(oldCmments);
+    console.log(oldComments);
 
     const currentComments = Comment.findAll();
     assert.deepStrictEqual(
@@ -91,7 +91,7 @@ describe('Comment.create()', () => {
     //データ更新前と更新後でデータが一致しているため、テストが失敗する
     assert.notDeepStrictEqual(
       { ...updatedComment },
-      { ...oldCmments[0] },
+      { ...oldComments[0] },
       '更新前のデータとupdatedCommentは一致しないはず'
     );
 
@@ -102,7 +102,7 @@ describe('Comment.create()', () => {
     );
 
     assert.strictEqual(
-      updatedComment.updatedAt > oldCmments[0].createdAt,
+      updatedComment.updatedAt > oldComments[0].createdAt,
       true,
       '更新前と更新後でcreatedAtの時間が変更されている'
     );
