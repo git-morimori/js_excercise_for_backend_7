@@ -44,4 +44,25 @@ module.exports = {
 
     return comment;
   },
+  update: ({ id, username, body }) => {
+    if (typeof id !== 'number' || id < 1) {
+      throw new Error('idは必須です(1以上の数値)');
+    }
+    if (!username) {
+      throw new Error('usernameは必須です');
+    }
+    if (!body) {
+      throw new Error('bodyは必須です');
+    }
+
+    const comment = comments.find(comment => id === comment.id);
+    if (!comment) {
+      throw new Error('idに該当するcommentが存在しません');
+    }
+    comment.username = username;
+    comment.body = body;
+    comment.updatedAt = new Date();
+
+    return comment;
+  },
 };
