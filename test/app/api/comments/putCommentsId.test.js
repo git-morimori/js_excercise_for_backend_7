@@ -96,12 +96,6 @@ describe('PUT /api/comments/:id', () => {
     );
 
     const currentComments = await getComments();
-    console.log(oldComments); //データを更新する前の配列が出てくる。オブジェクトの内容も変更されていない
-    console.log(currentComments); //データが変更された配列が出てくる
-
-    console.log(oldComments === currentComments); //falseになる
-    console.log(oldComments[0] === currentComments[0]); //falseになる
-
     assert.notDeepStrictEqual(
       { ...oldComments },
       { ...currentComments },
