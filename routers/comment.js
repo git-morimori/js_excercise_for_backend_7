@@ -7,6 +7,9 @@ router
   .get(controller.getComments)
   .post(controller.postComment);
 
-router.route('/:id').put(controller.putComment);
+router
+  .route('/:id')
+  .put(controller.putComment)
+  .delete(controller.deleteComment);
 
 module.exports = router;
