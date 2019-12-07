@@ -30,5 +30,15 @@ module.exports = {
       res.status(400).json({ message: error.message });
     }
   },
-  deleteComment: () => {},
+  deleteComment: (req, res) => {
+    try {
+      const id = req.params.id;
+      const parsedId = parseInt(id, 10);
+      const removedComment = Comment.remove(parsedId);
+
+      res.status(200).json(removedComment);
+    } catch (error) {
+      res.status(400).json({ message: error.message });
+    }
+  },
 };
